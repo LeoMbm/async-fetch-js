@@ -6,11 +6,9 @@ const button = document.querySelector("button");
 
 fetch("becode.json")
   .then(function (result) {
-    // console.log(result);
     return result.json();
   })
   .then(function (data) {
-    // console.log(data);
     function displayRules() {
       data.forEach((elem) => {
         const list = document.createElement("li");
