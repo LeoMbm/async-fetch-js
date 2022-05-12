@@ -1,23 +1,32 @@
-console.log("hello");
-const ul = document.querySelector("ul");
-const button = document.querySelector("button");
+// VARIABLES
 
-// FETCH AVEC BECODE.JSON
+const input = document.querySelector("#search-bar");
+const btn = document.querySelector("button");
 
-fetch("becode.json")
-  .then(function (result) {
-    return result.json();
-  })
-  .then(function (data) {
-    function displayRules() {
-      data.forEach((elem) => {
-        const list = document.createElement("li");
+// LISTENERS
+btn.addEventListener("click", sendSearch);
 
-        list.innerHTML = elem;
-        ul.appendChild(list);
-        console.log(elem);
-      });
-    }
-    button.addEventListener("click", displayRules);
-    return data;
-  });
+// FONCTION
+function sendSearch(e) {
+  e.preventDefault();
+  const value = input.value;
+  const fetchInput = (name) => fetch("https://api.agify.io/?name=" + name);
+
+  fetchInput(value)
+    .then((res) => res.json())
+    .then((data) => {
+      const div = document.createElement("div");
+      div.className = "result-search " + data.name;
+      const resultName = document.createElement("p");
+      const resultAge = document.createElement("p");
+      const resultCount = document.createElement("p");
+      resultName.innerHTML = "Name: " + data.name;
+      resultAge.innerHTML = "Age: " + data.age;
+      resultCount.innerHTML = "Count: " + data.count;
+
+      document.body.appendChild(div);
+      div.appendChild(resultName);
+      div.appendChild(resultAge);
+      div.appendChild(resultCount);
+    });
+}
