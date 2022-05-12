@@ -7,7 +7,6 @@ const options = document.querySelector("option");
 
 // LISTENERS
 btn.addEventListener("click", sendSearch);
-
 // FONCTION
 function sendSearch(e) {
   e.preventDefault();
@@ -25,6 +24,12 @@ function sendSearch(e) {
       const resultAge = document.createElement("p");
       const resultCount = document.createElement("p");
       const resultCountry = document.createElement("p");
+
+      localStorage.setItem("Name", data.name);
+      localStorage.setItem("Age", data.age);
+      localStorage.setItem("Count", data.count);
+      localStorage.setItem("Country", data.country_id);
+
       resultName.innerHTML = "Name: " + data.name;
       resultAge.innerHTML = "Age: " + data.age;
       resultCount.innerHTML = "Count: " + data.count;
@@ -37,3 +42,7 @@ function sendSearch(e) {
       div.appendChild(resultCountry);
     });
 }
+// btn.onclick = () => {
+//   localStorage.setItem("search", input.value);
+//   localStorage.setItem("country", select.value);
+// };
